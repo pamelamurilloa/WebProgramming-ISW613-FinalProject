@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        Schema::dropIfExists('news_sources');
+
         Schema::create('news_sources', function (Blueprint $table) {
             $table->id();
             $table->string('url', 255)->nullable(false);
@@ -19,15 +22,15 @@ return new class extends Migration
             $table->unsignedBigInteger('fk_user_id')->nullable(false);
             $table->timestamps();
 
-            $table->foreign('fk_user_id')
+            $table->foreign('category_id')
+            ->references('id')
+            ->on('categories')
+            ->onDelete('cascade')
+            ->onUpdate('restrict');
+            
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
-                ->onDelete('cascade')
-                ->onUpdate('restrict');
-
-            $table->foreign('fk_category_id')
-                ->references('id')
-                ->on('categories')
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
         });

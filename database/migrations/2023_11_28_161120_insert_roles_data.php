@@ -12,13 +12,10 @@ return new class extends Migration
     public function up(): void
     {
 
-        Schema::dropIfExists('roles');
-        
-        Schema::create('roles', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 50)->nullable(false);
-            $table->timestamps();
-        });
+        DB::table('roles')->insert([
+            ['name' => 'administrator', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'user', 'created_at' => now(), 'updated_at' => now()],
+        ]);
     }
 
     /**
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        //
     }
 };

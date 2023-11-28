@@ -11,6 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        Schema::dropIfExists('news');
+        Schema::dropIfExists('news_sources');
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('roles');
+        Schema::dropIfExists('categories');
+
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255)->nullable(false);

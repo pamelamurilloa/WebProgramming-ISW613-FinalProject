@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        Schema::dropIfExists('users');
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('firstname', 50)->nullable(false);
@@ -26,8 +29,8 @@ return new class extends Migration
             $table->foreign('fk_role_id')
                 ->references('id')
                 ->on('roles')
-                ->onDelete(2)
-                ->onUpdate(2);
+                ->onDelete('cascade')
+                ->onUpdate('restrict');
         });
     }
 
