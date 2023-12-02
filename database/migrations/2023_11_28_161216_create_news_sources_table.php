@@ -22,13 +22,13 @@ return new class extends Migration
             $table->unsignedBigInteger('fk_user_id')->nullable(false);
             $table->timestamps();
 
-            $table->foreign('category_id')
+            $table->foreign('fk_category_id')
             ->references('id')
             ->on('categories')
             ->onDelete('cascade')
             ->onUpdate('restrict');
             
-            $table->foreign('user_id')
+            $table->foreign('fk_user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade')
