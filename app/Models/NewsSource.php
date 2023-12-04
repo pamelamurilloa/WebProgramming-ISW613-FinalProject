@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class NewsSource extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'url',
+        'name',
+        'fk_category_id',
+        'fk_user_id'
+    ];
+
 }
