@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\NewsSourceController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/news-sources', [NewsSourceController::Class, 'index'])->name('source.index');
+
+Route::get('/news-sources/form', [NewsSourceController::Class, 'showForm'])->name('source.form');
+
+Route::post('/news-sources', [NewsSourceController::Class, 'create'])->name('source.create');
+
+
