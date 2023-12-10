@@ -9,6 +9,9 @@ class NewsSource extends Model
 {
     use HasFactory;
 
+    protected $table = 'news_sources';
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'url',
         'name',
