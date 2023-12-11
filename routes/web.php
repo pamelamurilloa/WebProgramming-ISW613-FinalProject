@@ -33,10 +33,6 @@ Route::get('/login', function () {
     return view('session.login');
 })->name('login')->middleware('guest');
 
-// Route::get('/categories', function () {
-//     return view('categories.index');
-// })->middleware('auth')->name('categories');
-
 Route::get('/my-cover', function () {
     return view('my-cover.index');
 })->middleware('auth')->name('my-cover');
@@ -44,10 +40,6 @@ Route::get('/my-cover', function () {
 Route::get('/register', function () {
     return view('session.register');
 })->name('register');
-
-Route::get('/news-sources', function () {
-    return view('news-sources.index');
-})->middleware('auth')->name('news-sources');
 
 Route::post('/register', [UserController::class, 'create']);
 

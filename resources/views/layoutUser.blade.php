@@ -17,7 +17,7 @@
                 <h1><a class="navbar-brand" href="{{ route('my-cover') }}">My Cover</a></h1>
                 <ul class="links">
                     <li class="nav-item"><a class="nav-link" href="{{ route('my-cover') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="{{ route('news-sources') }}">News Sources</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ route('news-sources.index') }}">News Sources</a></li>
 
                     <li class="nav-item"><form action="logout" method="put">
                         @csrf
@@ -25,7 +25,7 @@
                 </ul>
             </nav>
         </header>
-        <div class="container">
+        <div class="main-content">
             @yield('content')
         </div>
 

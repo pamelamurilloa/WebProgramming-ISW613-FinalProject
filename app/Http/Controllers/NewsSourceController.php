@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\NewsSource;
+use App\Models\News;
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class NewsSourceController extends Controller
 {
@@ -13,6 +16,8 @@ class NewsSourceController extends Controller
     public function index()
     {
         $newsSources = NewsSource::all();
+        $newsSources = NewsSource::with('category')->get();
+
         return view ('news-sources.index')->with('newsSources', $newsSources);
     }
 
@@ -21,8 +26,8 @@ class NewsSourceController extends Controller
      */
     public function create()
     {
-        $newSources = Career::all();
-        return view('news-sources.create')->with('newSources', $newSources);;
+        $categories = Category::all();
+        return view('news-sources.create')->with('categories', $categories);;
     }
 
     /**
@@ -31,6 +36,7 @@ class NewsSourceController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $input['user_id'] = Auth::user()->id;
         NewsSource::create($input);
         return redirect('news-sources')->with('flash_message', 'Source Succesfully Added');
     }

@@ -22,7 +22,7 @@
                 </ul>
             </nav>
         </header>
-        <div class="container">
+        <div class="main-content">
             @yield('content')
         </div>
 
