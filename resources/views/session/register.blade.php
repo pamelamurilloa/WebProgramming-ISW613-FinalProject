@@ -7,11 +7,11 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <!-- <link rel="stylesheet" href="../../style/all.css">
-        <link rel="stylesheet" href="../../style/header.css">
-        <link rel="stylesheet" href="../../style/footer.css">
-        <link rel="stylesheet" href="../../style/body.css"> -->
-        
+        <link rel="stylesheet" href="{{ asset('css/all.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/body.css') }}">
+
         <title>Register</title>
     </head>
 
@@ -28,18 +28,18 @@
         {!! csrf_field() !!}
         
         <div class="form-group">
-            <label for="first-name">First Name</label>
-            <input id="first-name" class="form-control" type="text" name="firstName">
+            <label for="firstname">First Name</label>
+            <input id="firstname" class="form-control" type="text" name="firstname">
         </div>
 
         <div class="form-group">
-            <label for="last-name">Last Name</label>
-            <input id="last-name" class="form-control" type="text" name="lastName" required>
+            <label for="lastname">Last Name</label>
+            <input id="lastname" class="form-control" type="text" name="lastname" required>
         </div>
 
         <div class="form-group">
-            <label for="user-name">Username</label>
-            <input id="user-name" class="form-control" type="text" name="userName" required>
+            <label for="username">Username</label>
+            <input id="username" class="form-control" type="text" name="username" required>
         </div>
 
         <div class="form-group">
@@ -59,7 +59,7 @@
 
         <div class="register-options">
             <button type="submit" class="btn btn-primary">Register</button>
-            <a class="btn" href="{{ route('session.index') }}">Return to Login</a>
+            <a class="btn" href="{{ route('login') }}">Return to Login</a>
         </div>
 
         </form>

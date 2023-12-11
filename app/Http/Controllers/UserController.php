@@ -13,8 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view ('session')->with('users', $users);
+        return view ('register');
     }
 
     /**
@@ -22,7 +21,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('session.register');
+        return view('register');
     }
 
     /**
@@ -32,6 +31,6 @@ class UserController extends Controller
     {
         $input = $request->all();
         User::create($input);
-        return redirect('session');
+        return redirect('login');
     }
 }

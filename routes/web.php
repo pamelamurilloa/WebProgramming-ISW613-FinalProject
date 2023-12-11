@@ -24,9 +24,11 @@ Route::get('/', function () {
 
 Route::resource("/news-sources", NewsSourceController::class);
 Route::resource("/category", CategoryController::class);
+Route::resource("/user", UserController::class);
+
 
 Route::get('/login', function () {
-    return view('login');
+    return view('session/login');
 })->name('login')->middleware('guest');
 
 
@@ -40,7 +42,7 @@ Route::get('/my-cover', function () {
 
 
 Route::get('/register', function () {
-    return view('register');
+    return view('session/register');
 })->name('register');
 
 Route::post('/register', [UserController::class, 'create']);
