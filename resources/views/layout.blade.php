@@ -13,7 +13,7 @@
                 <ul class="links">
                     <li class="nav-item"><a class="nav-link" href="{{ route('my-cover.index') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link active" href="{{ route('news-sources.index') }}">News Sources</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('session.logout') }}">Logout</a></li>
+                    <li class="nav-item"><form action="login" method="put" @csrf ><button class="nav-link">Logout</button></form></li>
                 </ul>
             </nav>
         </header>
