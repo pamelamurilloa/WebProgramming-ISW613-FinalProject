@@ -27,7 +27,7 @@ class LoginController extends Controller
                 return redirect()->intended('/categories');
 
             } else if ($role === 2) {
-                return redirect()->intended('/my-cover');
+                return redirect()->intended('/news');
             }
         }
 

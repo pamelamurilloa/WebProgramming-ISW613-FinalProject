@@ -16,4 +16,9 @@ class LabelNews extends Model
         'label_id',
         'news_id'
     ];
+
+    public function name()
+    {
+        return $this->belongsTo(Label::class, 'label_id');
+    }
 }

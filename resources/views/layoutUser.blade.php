@@ -14,9 +14,9 @@
     <body>
         <header id="header-container-index" class="sticky">
             <nav id="main-menu" role="navigation" class="navbar">
-                <h1><a class="navbar-brand" href="{{ route('my-cover') }}">My Cover</a></h1>
+                <h1><a class="navbar-brand" href="{{ route('news.index') }}">My Cover</a></h1>
                 <ul class="links">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('my-cover') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('news.index') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link active" href="{{ route('news-sources.index') }}">News Sources</a></li>
 
                     <li class="nav-item"><form action="logout" method="put">

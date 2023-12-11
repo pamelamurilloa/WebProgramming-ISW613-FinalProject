@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 
 use App\Http\Controllers\NewsSourceController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
-
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +22,11 @@ use App\Http\Controllers\MailController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('session.login');
+})->name('login')->middleware('guest');
 
 Route::resource("/news-sources", NewsSourceController::class);
+Route::resource("/news", NewsController::class);
 Route::resource("/categories", CategoryController::class);
 Route::resource("/user", UserController::class);
 Route::resource("/login", LoginController::class);
@@ -34,10 +35,6 @@ Route::resource("/mail", MailController::class);
 Route::get('/login', function () {
     return view('session.login');
 })->name('login')->middleware('guest');
-
-Route::get('/my-cover', function () {
-    return view('my-cover.index');
-})->middleware('auth')->name('my-cover');
 
 Route::get('/register', function () {
     return view('session.register');
