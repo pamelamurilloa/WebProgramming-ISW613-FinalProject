@@ -11,7 +11,7 @@
             @csrf
                 <div class="input-group">
                     <input class="form-control" name="search" placeholder="Search..." value="{{ isset($search) ? $search : ''}}">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" class="btn btn-warning">Search</button>
                 </div>
             </form>
         </div>
@@ -20,19 +20,20 @@
             <form method="get" action="{{ url('category') }}">
             @csrf
                 <label for="category_id">Category</label>
-                <select id="category_id" class="form-control selectpicker" name="category_id">
+                <select id="category_id" class="form-control" name="category_id">
                     <?php
+                        
                         foreach($categories as $category) {
                             $selected = '';
                             if (isset($categorySelected)) {
                                 $selected = ($category->id === $categorySelected->category_id) ? 'selected' : '';
                             }
-                            echo "<option value=$category->id>$category->name</option>";
+                            echo "<option value='$category->id'>$category->name</option>";
                         }
                     ?>
                 </select>
 
-                <input type="submit" class="btn btn-primary" value="Aplicar">
+                <input type="submit" class="btn btn-warning" value="Aplicar">
 
             </form>
         </div>
