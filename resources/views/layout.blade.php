@@ -18,7 +18,10 @@
                 <ul class="links">
                     <li class="nav-item"><a class="nav-link" href="{{ route('my-cover') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link active" href="{{ route('news-sources') }}">News Sources</a></li>
-                    <li class="nav-item"><form action="login" method="put" class="nav-link">@csrf<button class="nav-link">Logout</button></form></li>
+
+                    <li class="nav-item"><form action="logout" method="put">
+                        @csrf
+                    <button class="nav-link">Logout</button></form></li>
                 </ul>
             </nav>
         </header>

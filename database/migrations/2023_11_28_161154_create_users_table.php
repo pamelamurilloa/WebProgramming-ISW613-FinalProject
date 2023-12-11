@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('email',255)->nullable(false);
             $table->integer('cellphone')->nullable(false);
             $table->unsignedBigInteger('role_id')->default(2)->nullable(false);
+            $table->string('remember_token',255)->nullable(true);
             $table->timestamps();
 
             

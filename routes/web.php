@@ -52,7 +52,7 @@ Route::post('/register', [UserController::class, 'create']);
 
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::put('/login', [LoginController::class, 'logout']);
+Route::put('/logout', [LoginController::class, 'logout']);
 
 Route::get('/logout', [LoginController::class, 'logout']);
 
