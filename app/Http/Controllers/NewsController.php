@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\LabelNews;
 use App\Models\Label;
+use App\Models\Category;
 
 class NewsController extends Controller
 {
@@ -18,6 +19,8 @@ class NewsController extends Controller
         $news = News::all();
         $news = News::with('category')->get();
         $news = News::with('newsSource')->get();
+
+        $categories = Category::all();
     
         $labelNewsRaw = LabelNews::all()->groupBy('news_id');
         $labelNewsRaw = LabelNews::with('name')->get();
@@ -25,20 +28,15 @@ class NewsController extends Controller
         $newsLabels = [];
 
         foreach ($labelNewsRaw as $label) {
-            $labels = [];
-            if (  isset($newsLabels[$label->news_id]) ) {
-                $labels = $newsLabels[$label->news_id];
-            }
-            
-            array_push($labels, $label);
         
-            $newsLabels[$label->news_id] = [
-                'labels' => $labels,
-            ];
+            if (!isset($newsLabels[$label->news_id])) {
+                $newsLabels[$label->news_id]=[];
+            }
+            array_push($newsLabels[$label->news_id], $label->name);
 
         }
 
-        return view ('news.index', compact('news', 'newsLabels'));
+        return view ('news.index', compact('news', 'newsLabels', 'categories'));
     }
 
     /**
