@@ -25,29 +25,34 @@ Route::get('/', function () {
 Route::resource("/news-sources", NewsSourceController::class);
 Route::resource("/category", CategoryController::class);
 Route::resource("/user", UserController::class);
+Route::resource("/login", LoginController::class);
 
 
 Route::get('/login', function () {
-    return view('session/login');
+    return view('session.login');
 })->name('login')->middleware('guest');
 
-
 Route::get('/categories', function () {
-    return view('categories');
+    return view('categories.index');
 })->middleware('auth')->name('categories');
 
 Route::get('/my-cover', function () {
-    return view('my-cover');
+    return view('my-cover.index');
 })->middleware('auth')->name('my-cover');
 
-
 Route::get('/register', function () {
-    return view('session/register');
+    return view('session.register');
 })->name('register');
+
+Route::get('/news-sources', function () {
+    return view('news-sources.index');
+})->middleware('auth')->name('news-sources');
 
 Route::post('/register', [UserController::class, 'create']);
 
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::put('/login', [LoginController::class, 'logout']);
+
+Route::get('/logout', [LoginController::class, 'logout']);
 

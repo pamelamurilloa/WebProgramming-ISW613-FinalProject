@@ -21,24 +21,24 @@ return new class extends Migration
             $table->string('image', 255);
             $table->string('permalink', 255)->nullable(false);
             $table->date('date')->nullable(false);
-            $table->unsignedBigInteger('fk_news_sources_id')->nullable(false);
-            $table->unsignedBigInteger('fk_user_id')->nullable(false);
-            $table->unsignedBigInteger('fk_category_id')->nullable(false);
+            $table->unsignedBigInteger('news_sources_id')->nullable(false);
+            $table->unsignedBigInteger('user_id')->nullable(false);
+            $table->unsignedBigInteger('category_id')->nullable(false);
             $table->timestamps();
 
-            $table->foreign('fk_news_sources_id')
+            $table->foreign('news_sources_id')
                 ->references('id')
                 ->on('news_sources')
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
 
-            $table->foreign('fk_user_id')
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
 
-            $table->foreign('fk_category_id')
+            $table->foreign('category_id')
                 ->references('id')
                 ->on('categories')
                 ->onDelete('cascade')

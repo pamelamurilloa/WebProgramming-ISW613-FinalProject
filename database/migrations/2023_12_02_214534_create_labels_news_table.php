@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('labels_news', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('fk_label_id')->nullable(false);
-            $table->unsignedBigInteger('fk_news_id')->nullable(false);
+            $table->unsignedBigInteger('label_id')->nullable(false);
+            $table->unsignedBigInteger('news_id')->nullable(false);
             $table->timestamps();
 
-            $table->foreign('fk_label_id')
+            $table->foreign('label_id')
             ->references('id')
             ->on('labels')
             ->onDelete('cascade')
             ->onUpdate('restrict');
 
-            $table->foreign('fk_news_id')
+            $table->foreign('news_id')
             ->references('id')
             ->on('news')
             ->onDelete('cascade')

@@ -15,8 +15,8 @@ class NewsSource extends Model
     protected $fillable = [
         'url',
         'name',
-        'fk_category_id',
-        'fk_user_id'
+        'category_id',
+        'user_id'
     ];
 
 }

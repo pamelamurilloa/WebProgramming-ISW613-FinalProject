@@ -6,11 +6,11 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-        <link rel="stylesheet" href="{{ asset('css/all.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/header.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/body.css') }}">
+        
+        <link rel="stylesheet" href="{{ asset('../resources/css/all.css') }}">
+        <link rel="stylesheet" href="{{ asset('../resources/css/header.css') }}">
+        <link rel="stylesheet" href="{{ asset('../resources/css/footer.css') }}">
+        <link rel="stylesheet" href="{{ asset('../resources/css/body.css') }}">
 
         <title>Login</title>
     </head>
@@ -25,8 +25,8 @@
         <div class="main-content" id="login">
             <h2>User Login</h2>
 
-            <form action="login" method="post" class="form-inline" role="form" @csrf>
-            
+            <form method="post" action="{{ url('login') }}" class="form-inline" role="form">
+                @csrf
                 <div class="form-group">
                     <label class="label-form" for="username">Username</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="Your username">

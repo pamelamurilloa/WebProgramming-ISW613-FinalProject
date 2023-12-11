@@ -30,6 +30,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $input['password'] = bcrypt($request->input('password'));
+
         User::create($input);
         return redirect('login');
     }

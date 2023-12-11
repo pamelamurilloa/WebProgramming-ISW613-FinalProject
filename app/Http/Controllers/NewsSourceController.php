@@ -70,7 +70,7 @@ class NewsSourceController extends Controller
     public function destroy(string $id)
     {
         // Destroys all news associated with that source
-        News::where('fk_news_sources_id', $id)->delete();
+        News::where('news_sources_id', $id)->delete();
         NewsSource::destroy($id);
         return redirect('news-sources')->with('flash_message', 'Source and News Succesfully Deleted'); 
     }

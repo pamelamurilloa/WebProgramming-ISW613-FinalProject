@@ -13,7 +13,7 @@ class LabelNews extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'fk_label_id',
-        'fk_news_id'
+        'label_id',
+        'news_id'
     ];
 }

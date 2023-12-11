@@ -19,6 +19,6 @@ class User extends Model
         'password',
         'email',
         'cellphone',
-        'fk_role_id'
+        'role_id'
     ];
 }

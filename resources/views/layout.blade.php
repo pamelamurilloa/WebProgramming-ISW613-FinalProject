@@ -5,20 +5,20 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="{{ asset('css/all.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/header.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/body.css') }}">
+        <link rel="stylesheet" href="{{ asset('../resources/css/all.css') }}">
+        <link rel="stylesheet" href="{{ asset('../resources/css/header.css') }}">
+        <link rel="stylesheet" href="{{ asset('../resources/css/footer.css') }}">
+        <link rel="stylesheet" href="{{ asset('../resources/css/body.css') }}">
     </head>
     
     <body>
         <header id="header-container-index" class="sticky">
             <nav id="main-menu" role="navigation" class="navbar">
-                <h1><a class="navbar-brand" href="{{ route('my-cover/index') }}">My Cover</a></h1>
+                <h1><a class="navbar-brand" href="{{ route('my-cover') }}">My Cover</a></h1>
                 <ul class="links">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('my-cover/index') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="{{ route('news-sources/index') }}">News Sources</a></li>
-                    <li class="nav-item"><form action="login" method="put" @csrf ><button class="nav-link">Logout</button></form></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('my-cover') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ route('news-sources') }}">News Sources</a></li>
+                    <li class="nav-item"><form action="login" method="put" class="nav-link">@csrf<button class="nav-link">Logout</button></form></li>
                 </ul>
             </nav>
         </header>

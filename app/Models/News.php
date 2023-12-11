@@ -18,9 +18,9 @@ class News extends Model
         'image',
         'permalink',
         'date',
-        'fk_news_sources_id',
-        'fk_user_id',
-        'fk_category_id'
+        'news_sources_id',
+        'user_id',
+        'category_id'
     ];
 
 }

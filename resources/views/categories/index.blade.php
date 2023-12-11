@@ -1,6 +1,8 @@
 @extends('layout')
 @section('content')
 
+categories
+<!-- 
     <div class="main-content">
 
         <h2>Your Unique News Cover</h2>
@@ -34,6 +36,6 @@
 
         <a href="{{ url('/category/create') }}" class="btn btn-success btn-sm" title="Add New Category">Add New </a>
         
-    </div>
+    </div> -->
 
 @stop
