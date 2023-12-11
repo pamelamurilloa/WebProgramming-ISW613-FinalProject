@@ -48,3 +48,8 @@ Route::put('/logout', [LoginController::class, 'logout']);
 
 Route::get('/logout', [LoginController::class, 'logout']);
 
+Route::get('/search', [NewsController::class,'search']);
+
+Route::get('/category', [NewsController::class,'filterCategory']);
+
+Route::get('/labels', [NewsController::class,'filterLabels']);

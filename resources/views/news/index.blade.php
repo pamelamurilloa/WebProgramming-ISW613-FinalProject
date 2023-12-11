@@ -4,15 +4,57 @@
     <h2>Your Unique News Cover</h2>
             
     <h3>Categories</h3>
-    <div class="button-list category-list">
-        <?php
-            if ( !empty($categories) ) {
-                foreach ($categories as $category) :
-                    echo '<a class="btn btn-primary" href="myCover.php?id=' . $category->id . '">'.$category->name.'</a>';
-                endforeach;
-            }
-        ?>
+
+    <div class='filters'>
+        <div class="form-group">
+            <form method="get" action="{{ url('search') }}">
+            @csrf
+                <div class="input-group">
+                    <input class="form-control" name="search" placeholder="Search..." value="{{ isset($search) ? $search : ''}}">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-group">
+            <form method="get" action="{{ url('category') }}">
+            @csrf
+                <label for="category_id">Category</label>
+                <select id="category_id" class="form-control selectpicker" name="category_id">
+                    <?php
+                        foreach($categories as $category) {
+                            $selected = '';
+                            if (isset($categorySelected)) {
+                                $selected = ($category->id === $categorySelected->category_id) ? 'selected' : '';
+                            }
+                            echo "<option value=$category->id>$category->name</option>";
+                        }
+                    ?>
+                </select>
+
+                <input type="submit" class="btn btn-primary" value="Aplicar">
+
+            </form>
+        </div>
+
+        <!-- <div class="form-group">
+            <form method="get" action="{{ url('labels') }}">
+            @csrf
+                <label for="label_id">Tags</label>
+                <select id="label_id" class="form-control selectpicker" name="label_id" multiple>
+                    <?php
+                        // foreach($labels as $label) {
+                        //     echo "<option value=$label->id>$label->name</option>";
+                        // }
+                    ?>
+                </select>
+
+                <input type="submit" class="btn btn-primary" value="Aplicar">
+
+            </form>
+        </div> -->
     </div>
+
     <?php
 
         echo '<div class="card-columns">';
