@@ -12,11 +12,11 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(News $news)
+    public function store(Array $news)
     {
-        $news->save();
+        News::create($news);
 
-        $insertedNews = YourModel::latest()->first();
+        $insertedNews = News::latest()->first();
 
         return $insertedNews->id;
     }

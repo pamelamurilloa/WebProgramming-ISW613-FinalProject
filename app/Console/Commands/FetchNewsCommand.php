@@ -3,10 +3,19 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+use DateTime;
+
 use App\Http\Controllers\NewsSourceController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\LabelController;
 use App\Http\Controllers\LabelNewsController;
+
+use App\Models\NewsSource;
+use App\Models\News;
+use App\Models\Label;
+use App\Models\LabelNews;
+use App\Models\Category;
 
 class FetchNewsCommand extends Command
 {
@@ -32,12 +41,20 @@ class FetchNewsCommand extends Command
     public function handle()
     {
 
+        $newsSourcesController = new NewsSourceController();
         $newsController = new NewsController();
         $labelController = new LabelController();
         $labelNewsController = new LabelNewsController();
 
         $newsSources = NewsSource::all();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        LabelNews::truncate();
+        Label::truncate();
         News::truncate();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         foreach ($newsSources as $sources) :
             $url = $sources['url'];
@@ -82,13 +99,15 @@ class FetchNewsCommand extends Command
                 /** 
                  * ENDS LABELS FORMATING ZONE
                  */
+
+                $text = mb_strimwidth($text, 0, 196, "...");
                 
                 $news['title'] = $item->title;
-                $news['description'] = $text;
+                $news['short_description'] = $text;
                 $news['image'] = $src;
-                $news['link'] = $item->link;
+                $news['permalink'] = $item->link;
                 $news['date'] = $newDateTime;
-                $news['news_source_id'] = $sources['id'];
+                $news['news_sources_id'] = $sources['id'];
                 $news['user_id'] = $sources['user_id'];
                 $news['category_id'] = $sources['category_id'];
 
