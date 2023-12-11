@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsSourceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CategoryController;
 
 
 /*
@@ -23,7 +24,7 @@ Route::get('/', function () {
 });
 
 Route::resource("/news-sources", NewsSourceController::class);
-Route::resource("/category", CategoryController::class);
+Route::resource("/categories", CategoryController::class);
 Route::resource("/user", UserController::class);
 Route::resource("/login", LoginController::class);
 
@@ -32,9 +33,9 @@ Route::get('/login', function () {
     return view('session.login');
 })->name('login')->middleware('guest');
 
-Route::get('/categories', function () {
-    return view('categories.index');
-})->middleware('auth')->name('categories');
+// Route::get('/categories', function () {
+//     return view('categories.index');
+// })->middleware('auth')->name('categories');
 
 Route::get('/my-cover', function () {
     return view('my-cover.index');

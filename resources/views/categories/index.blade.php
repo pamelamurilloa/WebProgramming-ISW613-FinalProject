@@ -1,11 +1,9 @@
-@extends('layout')
+@extends('layoutAdmin')
 @section('content')
 
-categories
-<!-- 
     <div class="main-content">
 
-        <h2>Your Unique News Cover</h2>
+        <h2>Category Administration</h2>
 
         <table class="table">
             <thead>
@@ -17,25 +15,31 @@ categories
                 </tr>
             </thead>
             <tbody>
-                @foreach ($categories as $category) :
-                    <tr>
-                        <td>{{ $loop->id }}</td>
-                        <td>{{ $item->name }}</td>
-
-                        <a href="{{ url('/category/' . $item->id . '/edit') }}" title="Edit Category"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-                    </tr>
-
-                    <form method="POST" action="{{ url('/category' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                        {{ method_field('DELETE') }}
-                        {{ csrf_field() }}
-                        <button type="submit" class="btn btn-danger btn-sm" title="Delete Category" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                    </form>
-                @endforeach; 
+                @if (isset($categories))    
+                    @foreach ($categories as $item)
+                        <tr>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->name }}</td>
+                        
+                            <td>
+                                <a href="{{ url('/categories/' . $item->id . '/edit') }}" title="Edit Category"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{ url('/categories' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                    {{ method_field('DELETE') }}
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Delete Category"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        
+                    @endforeach;
+                @endif
             </tbody>
         </table>
 
-        <a href="{{ url('/category/create') }}" class="btn btn-success btn-sm" title="Add New Category">Add New </a>
+        <a href="{{ url('/categories/create') }}" class="btn btn-success btn-sm" title="Add New Category">Add New </a>
         
-    </div> -->
+    </div>
 
 @stop
