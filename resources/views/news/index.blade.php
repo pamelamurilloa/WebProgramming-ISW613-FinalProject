@@ -2,8 +2,6 @@
 @section('content')
 
     <h2>Your Unique News Cover</h2>
-            
-    <h3>Categories</h3>
 
     <div class='filters'>
         <div class="form-group">
@@ -22,38 +20,31 @@
                 <label for="category_id">Category</label>
                 <select id="category_id" class="form-control" name="category_id">
                     <?php
-                        
-                        foreach($categories as $category) {
-                            $selected = '';
-                            if (isset($categorySelected)) {
-                                $selected = ($category->id === $categorySelected->category_id) ? 'selected' : '';
-                            }
-                            echo "<option value='$category->id'>$category->name</option>";
+                        foreach ($categories as $category) {
+                            echo '<option value="' . $category->id . '">' . $category->name . '</option>';
                         }
                     ?>
-                </select>
+                </select>   
 
                 <input type="submit" class="btn btn-warning" value="Aplicar">
 
             </form>
         </div>
 
-        <!-- <div class="form-group">
+        <div class="form-group">
             <form method="get" action="{{ url('labels') }}">
             @csrf
                 <label for="label_id">Tags</label>
-                <select id="label_id" class="form-control selectpicker" name="label_id" multiple>
+                <select id="label_id[]" class="form-control" data_style="btn-primary" name="label_id" multiple>
                     <?php
-                        // foreach($labels as $label) {
-                        //     echo "<option value=$label->id>$label->name</option>";
-                        // }
+                        foreach($labels as $label) {
+                            echo '<option value="' . $label->id . '">'.$label->name.'</option>';
+                        }
                     ?>
                 </select>
-
                 <input type="submit" class="btn btn-primary" value="Aplicar">
-
             </form>
-        </div> -->
+        </div>
     </div>
 
     <?php

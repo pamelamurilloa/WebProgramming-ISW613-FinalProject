@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\News;
@@ -33,14 +34,16 @@ class NewsController extends Controller
      */
     public function index()
     {
+        $labels = Label::all();
         $news = News::all();
         $news = News::with('category')->get();
         $news = News::with('newsSource')->get();
 
         $categories = Category::all();
         $newsLabels = $this->groupLabels();
+        
 
-        return view ('news.index', compact('news', 'newsLabels', 'categories'));
+        return view ('news.index', compact('news', 'newsLabels', 'labels', 'categories'));
     }
 
     public function search(Request $request) {
@@ -57,28 +60,44 @@ class NewsController extends Controller
             })
             ->get();
 
+        $labels = Label::all();
         $categories = Category::all();
         $newsLabels = $this->groupLabels();
         
-        return view('news.index',compact('news','search', 'newsLabels', 'categories'));
+        return view('news.index',compact('news', 'search', 'newsLabels', 'labels', 'categories'));
     }
 
     public function filterCategory(Request $request) {
-        $categorySelected = $request->search;
+        $categorySelected = $request->category_id;
 
-        $news =News::where('category_id', $categorySelected);
+        $news =News::where('category_id', $categorySelected)->get();;
 
+        $labels = Label::all();
         $categories = Category::all();
         $newsLabels = $this->groupLabels();
 
-        return view ('news.index', compact('news', 'categorySelected', 'newsLabels', 'categories'));
+        return view ('news.index', compact('news', 'newsLabels', 'labels', 'categories'));
     }
 
     public function filterLabels(Request $request) {
+        $labels = $request->all();
+        
+        $user = Auth::user();
+        $id = $user->id;
+
+        $newsIds = LabelNews::whereIn('label_id', $labels)->pluck('news_id')->toArray();
+
+        $news = News::with('newsSource')->where('user_id', $id)->whereIn('id', $newsIds)->get();
+
+        $labels = Label::all();
         $categories = Category::all();
         $newsLabels = $this->groupLabels();
 
-        return view ('news.index', compact('news', 'newsLabels', 'categories'));
+        //    SELECT n.* FROM news AS n WHERE n.user_id = $id AND n.id in (
+        //SELECT news_id FROM labels_news WHERE label_id IN ($labels) 
+        //);
+
+        return view ('news.index', compact('news', 'newsLabels', 'labels', 'categories'));
     }
 
     /**
@@ -92,6 +111,8 @@ class NewsController extends Controller
 
         return $insertedNews->id;
     }
+
+
 
 
     /**
