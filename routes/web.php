@@ -19,10 +19,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/news-sources', [NewsSourceController::Class, 'index'])->name('source.index');
-
-Route::get('/news-sources/form', [NewsSourceController::Class, 'showForm'])->name('source.form');
-
-Route::post('/news-sources', [NewsSourceController::Class, 'create'])->name('source.create');
-
-
+Route::resource("/news-sources", NewsSourceController::class);
