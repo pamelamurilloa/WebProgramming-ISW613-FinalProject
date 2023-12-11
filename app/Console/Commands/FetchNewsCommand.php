@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Http\Controllers\NewsSourceController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\LabelController;
+use App\Http\Controllers\LabelNewsController;
 
 class FetchNewsCommand extends Command
 {
@@ -29,6 +31,10 @@ class FetchNewsCommand extends Command
      */
     public function handle()
     {
+
+        $newsController = new NewsController();
+        $labelController = new LabelController();
+        $labelNewsController = new LabelNewsController();
 
         $newsSources = NewsSource::all();
         News::truncate();
@@ -68,16 +74,15 @@ class FetchNewsCommand extends Command
                  * 
                  * BEGINS LABELS FORMATING ZONE
                  */
-
-                /** 
-                 * ENDS LABELS FORMATING ZONE
-                 */
                 $labels = [];
                 foreach ($item->category as $label) {
                     $labels[] = (string)$label;
                 }
 
-
+                /** 
+                 * ENDS LABELS FORMATING ZONE
+                 */
+                
                 $news['title'] = $item->title;
                 $news['description'] = $text;
                 $news['image'] = $src;
@@ -87,7 +92,12 @@ class FetchNewsCommand extends Command
                 $news['user_id'] = $sources['user_id'];
                 $news['category_id'] = $sources['category_id'];
 
-                saveNews($news);
+                $news_id = $newsController->store($news);
+
+                foreach ($labels as $label) {
+                    $labelController->store($label, $news_id);
+                }
+                
 
             }
 

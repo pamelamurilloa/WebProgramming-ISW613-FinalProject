@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\News;
+
 
 class NewsController extends Controller
 {
@@ -13,6 +15,10 @@ class NewsController extends Controller
     public function store(News $news)
     {
         $news->save();
+
+        $insertedNews = YourModel::latest()->first();
+
+        return $insertedNews->id;
     }
 
 
