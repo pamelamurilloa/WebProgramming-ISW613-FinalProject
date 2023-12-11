@@ -16,7 +16,7 @@ class NewsController extends Controller
     {
         News::create($news);
 
-        $insertedNews = News::latest()->first();
+        $insertedNews = News::orderBy('id', 'DESC')->first();
 
         return $insertedNews->id;
     }

@@ -17,10 +17,11 @@ class LabelController extends Controller
 
         if ($notExists)
         {
-            $label->save();
+            $labelArray['name'] = $label;
+            Label::create($labelArray);
         }
 
-        $record = Label::where('label', $label)->first();
+        $record = Label::where('name', $label)->first();
         
         $labelNewsController = new LabelNewsController();
         
