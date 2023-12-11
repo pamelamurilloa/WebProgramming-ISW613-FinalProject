@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 use App\Http\Controllers\NewsSourceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MailController;
 
 
 /*
@@ -27,7 +29,7 @@ Route::resource("/news-sources", NewsSourceController::class);
 Route::resource("/categories", CategoryController::class);
 Route::resource("/user", UserController::class);
 Route::resource("/login", LoginController::class);
-
+Route::resource("/mail", MailController::class);
 
 Route::get('/login', function () {
     return view('session.login');

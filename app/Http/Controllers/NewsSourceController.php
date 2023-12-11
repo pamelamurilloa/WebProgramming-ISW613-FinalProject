@@ -27,7 +27,7 @@ class NewsSourceController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('news-sources.create')->with('categories', $categories);;
+        return view('news-sources.create')->with('categories', $categories);
     }
 
     /**

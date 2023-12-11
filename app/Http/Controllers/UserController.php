@@ -6,8 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
+use Illuminate\Support\Mail;
+use App\Services\MailService;
+
+
 class UserController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
@@ -31,6 +36,12 @@ class UserController extends Controller
     {
         $input = $request->all();
         $input['password'] = bcrypt($request->input('password'));
+
+        $mailController = new MailController();
+        // $response = $mailController->sendMail($input['email']);
+
+        $response = $mailController->sendMail('proyectoprogra084@gmail.com');
+
 
         User::create($input);
         return redirect('login');
