@@ -22,6 +22,10 @@
     margin-bottom: 1%;
 }
 
+.form-group {
+    min-width: 60%;
+}
+
 .register-options p, .register-options a {
     font-size: 0.9rem;
 }
@@ -89,11 +93,27 @@
     color: var(--color-sass--primary);
 }
 
-.filter {
+.filters {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+}
+
+.form-main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.form-control {
+    height: 90%;
+    align-self: center;
+}
+
+.btn-form {
+    margin: 3%;
 }
 
 @media screen and (min-width: 768px) {

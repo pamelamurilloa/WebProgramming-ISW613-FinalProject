@@ -55,34 +55,42 @@ class NewsController extends Controller
     public function search(Request $request) {
         $search = $request->search;
 
+        $user = Auth::user();
+        $id = $user->id;
+
         $news =News::where(function($query) use ($search){
 
             $query->where('title','like',"%$search%")
             ->orWhere('short_description','like',"%$search%");
-
             })
             ->orWhereHas('category',function($query) use($search){
                 $query->where('name','like',"%$search%");
             })
+            ->where('user_id',"$id")
             ->get();
 
         $labels = Label::all();
         $categories = Category::all();
         $newsLabels = $this->groupLabels();
+        $guest = false;
         
-        return view('news.index',compact('news', 'search', 'newsLabels', 'labels', 'categories'));
+        return view('news.index',compact('news', 'search', 'newsLabels', 'labels', 'categories', 'guest'));
     }
 
     public function filterCategory(Request $request) {
         $categorySelected = $request->category_id;
 
-        $news =News::where('category_id', $categorySelected)->get();
+        $user = Auth::user();
+        $id = $user->id;
+
+        $news =News::where('category_id', $categorySelected)->where('user_id', $id)->get();
 
         $labels = Label::all();
         $categories = Category::all();
         $newsLabels = $this->groupLabels();
+        $guest = false;
 
-        return view ('news.index', compact('news', 'newsLabels', 'labels', 'categories'));
+        return view ('news.index', compact('news', 'newsLabels', 'labels', 'categories', 'guest'));
     }
 
     public function filterLabels(Request $request) {
@@ -98,8 +106,9 @@ class NewsController extends Controller
         $labels = Label::all();
         $categories = Category::all();
         $newsLabels = $this->groupLabels();
+        $guest = false;
 
-        return view ('news.index', compact('news', 'newsLabels', 'labels', 'categories'));
+        return view ('news.index', compact('news', 'newsLabels', 'labels', 'categories', 'guest'));
     }
 
     /**
@@ -115,6 +124,7 @@ class NewsController extends Controller
     }
 
     public function guestPage(string $username) {
+
         $user = User::where('username','like', $username)->first();
         if (isset($user) && $user->public === 1) {
             return $this->renderInfo($user, true);

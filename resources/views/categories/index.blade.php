@@ -10,8 +10,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Category Name</th>
-                    <td>Edit</td>
-                    <td>Delete</td>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>

@@ -25,7 +25,7 @@
     padding: 5px;
 }
 
-#main-menu ul {
+.main-menu ul {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,27 +33,27 @@
     flex-direction: column;
 }
 
-#main-menu ul li .nav-link{
+.main-menu ul li .nav-link{
     margin: 5px;
     color: var(--color-sass--background);
     background-color: var(--color-sass--secondary);
     border-radius: 22px;
 }
 
-#main-menu ul li .nav-link:hover{
+.main-menu ul li .nav-link:hover{
     margin: 5px;
     color: var(--color-sass--specific);
     background-color: var(--color-sass--background);
     border-radius: 22px;
 }
 
-#main-menu ul li .active{
+.main-menu ul li .active{
     color: var(--color-sass--specific);
     background-color: var(--color-sass--terciary);
 }
 
 @media screen and (min-width: 320px) {
-    #main-menu ul {
+    .main-menu ul {
         display: flex;
         align-items: center;
         justify-content: center;

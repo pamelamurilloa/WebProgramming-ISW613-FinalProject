@@ -1,4 +1,5 @@
-@extends($guest ? 'layoutGuest' : 'layoutUser')
+
+@extends(isset($guest) && $guest ? 'layoutGuest' : 'layoutUser')
 
 @section('content')
 
@@ -8,17 +9,17 @@
 
     <div class='filters'>
         <div class="form-group">
-            <form method="get" action="{{ url('search') }}">
+            <form class='form-main' method="get" action="{{ url('search') }}">
             @csrf
                 <div class="input-group">
                     <input class="form-control" name="search" placeholder="Search..." value="{{ isset($search) ? $search : ''}}">
-                    <button type="submit" class="btn btn-warning">Search</button>
+                    <button type="submit" class="btn btn-warning btn-form">Search</button>
                 </div>
             </form>
         </div>
 
         <div class="form-group">
-            <form method="get" action="{{ url('category') }}">
+            <form class='form-main' method="get" action="{{ url('category') }}">
             @csrf
                 <label for="category_id">Category</label>
                 <select id="category_id" class="form-control" name="category_id">
@@ -29,13 +30,13 @@
                     ?>
                 </select>   
 
-                <input type="submit" class="btn btn-warning" value="Aplicar">
+                <input type="submit" class="btn btn-warning btn-form" value="Aplicar">
 
             </form>
         </div>
 
         <div class="form-group">
-            <form method="get" action="{{ url('labels') }}">
+            <form class='form-main' method="get" action="{{ url('labels') }}">
             @csrf
                 <label for="label_id">Tags</label>
                 <select id="label_id[]" class="form-control" data_style="btn-primary" name="label_id" multiple>
@@ -45,7 +46,7 @@
                         }
                     ?>
                 </select>
-                <input type="submit" class="btn btn-primary" value="Aplicar">
+                <input type="submit" class="btn btn-primary btn-form" value="Aplicar">
             </form>
         </div>
     </div>

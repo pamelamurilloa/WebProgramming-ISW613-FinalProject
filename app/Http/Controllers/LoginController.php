@@ -29,9 +29,13 @@ class LoginController extends Controller
             } else if ($role === 2) {
                 return redirect()->intended('/news');
             }
+            
+            return redirect('/');
         }
-
-        return redirect('/');
+        
+        return back()->withErrors([
+            'username' => 'The provided credentials do not match our records.',
+        ])->onlyInput('username');
     }
 
     public function logout(Request $request)

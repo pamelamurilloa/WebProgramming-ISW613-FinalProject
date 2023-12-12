@@ -9,12 +9,15 @@
         <link rel="stylesheet" href="{{ asset('../resources/css/header.css') }}">
         <link rel="stylesheet" href="{{ asset('../resources/css/footer.css') }}">
         <link rel="stylesheet" href="{{ asset('../resources/css/body.css') }}">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
     </head>
     
     <body>
-        <header id="header-container-index" class="sticky">
-            <nav id="main-menu" role="navigation" class="navbar">
-                <h1><a class="navbar-brand">My Cover</a></h1>
+        <header id="header-container-admin" class="sticky">
+            <nav role="navigation" class="navbar main-menu">
+                <h1><a class="navbar-brand" href="{{ url('categories.index') }}">My Cover</a></h1>
                 <ul class="links">
                     <li class="nav-item"><form action="logout" method="put">
                         @csrf

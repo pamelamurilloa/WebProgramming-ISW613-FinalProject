@@ -29,11 +29,11 @@
                 @csrf
                 <div class="form-group">
                     <label class="label-form" for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Your username">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Your username" required>
                 </div>
                 <div class="form-group">
                     <label class="label-form" for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Your password">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Your password" required>
                 </div>
 
                 <input type="submit" class="btn btn-primary" value="Login"></input>
