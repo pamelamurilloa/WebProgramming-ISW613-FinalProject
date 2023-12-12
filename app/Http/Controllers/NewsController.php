@@ -35,7 +35,7 @@ class NewsController extends Controller
     public function index()
     {
         $labels = Label::all();
-        $news = News::all();
+        $news = News::where('user_id', Auth::user()->id)->get();
         $news = News::with('category')->get();
         $news = News::with('newsSource')->get();
 
