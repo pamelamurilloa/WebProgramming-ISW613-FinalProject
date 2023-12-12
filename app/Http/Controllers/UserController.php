@@ -38,12 +38,25 @@ class UserController extends Controller
         $input['password'] = bcrypt($request->input('password'));
 
         $mailController = new MailController();
-        // $response = $mailController->sendMail($input['email']);
-
-        $response = $mailController->sendMail('proyectoprogra084@gmail.com');
+        $response = $mailController->sendMail($input['email']);
 
 
         User::create($input);
         return redirect('login');
     }
+
+    public function changeAccess() {
+        $user = User::find(Auth::user()->id);
+
+        if ($user->public == 1) {
+            $user->public = 0;
+        } else {
+            $user->public = 1;
+        }
+
+        $user->save();
+        return redirect(route('news-sources.index'));
+    }
+
+
 }

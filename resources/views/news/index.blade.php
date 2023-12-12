@@ -1,7 +1,10 @@
-@extends('layoutUser')
+@extends($guest ? 'layoutGuest' : 'layoutUser')
+
 @section('content')
 
     <h2>Your Unique News Cover</h2>
+
+    <?php if (!$guest) { ?>
 
     <div class='filters'>
         <div class="form-group">
@@ -46,6 +49,8 @@
             </form>
         </div>
     </div>
+
+<?php } ?>
 
     <?php
 

@@ -1,6 +1,17 @@
 @extends('layoutUser')
 @section('content')
 
+
+    <form action="publish" method="post">
+            @csrf
+        <button class="btn btn-warning">Change Access</button>
+    </form>
+    <?php
+        if ($user->public == 1) {
+            echo '<p>Your page is now public, the route to access it is: '.url("guest/$user->username").'</p>';
+        }
+    ?>
+
     <div class="main-content">
 
         <h2>News Sources Administration</h2>

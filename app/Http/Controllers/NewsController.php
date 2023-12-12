@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\LabelNews;
 use App\Models\Label;
+use App\Models\User;
 use App\Models\Category;
 
 class NewsController extends Controller
@@ -29,21 +30,26 @@ class NewsController extends Controller
 
         return $newsLabels;
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
+
+    private function renderInfo(User $user, bool $guest) {
         $labels = Label::all();
-        $news = News::where('user_id', Auth::user()->id)->get();
+        $news = News::where('user_id', $user->id)->get();
         $news = News::with('category')->get();
         $news = News::with('newsSource')->get();
 
         $categories = Category::all();
         $newsLabels = $this->groupLabels();
-        
 
-        return view ('news.index', compact('news', 'newsLabels', 'labels', 'categories'));
+        return view ('news.index', compact('news', 'newsLabels', 'labels', 'categories', 'guest'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $user = User::find(Auth::user()->id);
+        return $this->renderInfo($user, false);
     }
 
     public function search(Request $request) {
@@ -70,7 +76,7 @@ class NewsController extends Controller
     public function filterCategory(Request $request) {
         $categorySelected = $request->category_id;
 
-        $news =News::where('category_id', $categorySelected)->get();;
+        $news =News::where('category_id', $categorySelected)->get();
 
         $labels = Label::all();
         $categories = Category::all();
@@ -93,10 +99,6 @@ class NewsController extends Controller
         $categories = Category::all();
         $newsLabels = $this->groupLabels();
 
-        //    SELECT n.* FROM news AS n WHERE n.user_id = $id AND n.id in (
-        //SELECT news_id FROM labels_news WHERE label_id IN ($labels) 
-        //);
-
         return view ('news.index', compact('news', 'newsLabels', 'labels', 'categories'));
     }
 
@@ -112,8 +114,13 @@ class NewsController extends Controller
         return $insertedNews->id;
     }
 
-
-
+    public function guestPage(string $username) {
+        $user = User::where('username','like', $username)->first();
+        if (isset($user) && $user->public === 1) {
+            return $this->renderInfo($user, true);
+        }
+        return redirect('/');
+    }
 
     /**
      * Remove the specified resource from storage.

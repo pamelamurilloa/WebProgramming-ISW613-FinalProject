@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\NewsSource;
 use App\Models\News;
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,8 +18,9 @@ class NewsSourceController extends Controller
     {
         $newsSources = NewsSource::all();
         $newsSources = NewsSource::with('category')->get();
+        $user = User::find(Auth::user()->id);
 
-        return view ('news-sources.index')->with('newsSources', $newsSources);
+        return view ('news-sources.index', compact('newsSources', 'user') );
     }
 
     /**

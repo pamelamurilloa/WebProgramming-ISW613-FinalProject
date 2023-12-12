@@ -20,6 +20,7 @@ class User extends Model
         'email',
         'cellphone',
         'role_id',
+        'public',
         'remember_token'
     ];
 }

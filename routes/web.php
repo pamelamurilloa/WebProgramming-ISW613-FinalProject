@@ -35,6 +35,8 @@ Route::get('/', function (Request $request) {
             return redirect()->intended('/news');
         }
     }
+    return redirect()->intended('/login');
+
     }
 );
 
@@ -53,16 +55,16 @@ Route::get('/register', function () {
     return view('session.register');
 })->name('register');
 
+Route::get('/guest/{username}', [NewsController::class, 'guestPage']);
+
 Route::post('/register', [UserController::class, 'create']);
 
 Route::post('/login', [LoginController::class, 'login']);
-
 Route::put('/logout', [LoginController::class, 'logout']);
-
 Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::get('/search', [NewsController::class,'search'])->middleware('auth');
-
 Route::get('/category', [NewsController::class,'filterCategory'])->middleware('auth');
-
 Route::get('/labels', [NewsController::class,'filterLabels'])->middleware('auth');
+
+Route::post('/publish', [UserController::class,'changeAccess'])->middleware('auth');

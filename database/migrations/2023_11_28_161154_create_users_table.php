@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password', 255)->nullable(false);
             $table->string('email',255)->nullable(false);
             $table->integer('cellphone')->nullable(false);
+            $table->boolean('public')->nullable(false)->default(0);
             $table->unsignedBigInteger('role_id')->default(2)->nullable(false);
             $table->timestamps();
             
