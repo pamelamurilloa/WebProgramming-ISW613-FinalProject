@@ -12,6 +12,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         FetchNewsCommand::Class
     ];
+
     /**
      * Define the application's command schedule.
      */
@@ -29,4 +30,6 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+
+    
 }

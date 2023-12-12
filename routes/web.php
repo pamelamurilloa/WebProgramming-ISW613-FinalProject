@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
+use \App\Http\Middleware\IsAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +22,25 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('session.login');
-})->name('login')->middleware('guest');
+Route::get('/', function (Request $request) {
+    
+    $user = Auth::user();
+    if ( isset($user) ) {
+        $role = $user->role_id;
 
-Route::resource("/news-sources", NewsSourceController::class);
-Route::resource("/news", NewsController::class);
-Route::resource("/categories", CategoryController::class);
+        if ($role === 1) {
+            return redirect()->intended('/categories');
+
+        } else if ($role === 2) {
+            return redirect()->intended('/news');
+        }
+    }
+    }
+);
+
+Route::resource("/news-sources", NewsSourceController::class, ['middleware' => ['auth', 'user']]);
+Route::resource("/news", NewsController::class, ['middleware' => ['auth', 'user']]);
+Route::resource("/categories", CategoryController::class, ['middleware' => ['auth', 'admin']]);
 Route::resource("/user", UserController::class);
 Route::resource("/login", LoginController::class);
 Route::resource("/mail", MailController::class);
@@ -48,8 +61,8 @@ Route::put('/logout', [LoginController::class, 'logout']);
 
 Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::get('/search', [NewsController::class,'search']);
+Route::get('/search', [NewsController::class,'search'])->middleware('auth');
 
-Route::get('/category', [NewsController::class,'filterCategory']);
+Route::get('/category', [NewsController::class,'filterCategory'])->middleware('auth');
 
-Route::get('/labels', [NewsController::class,'filterLabels']);
+Route::get('/labels', [NewsController::class,'filterLabels'])->middleware('auth');
